@@ -1,6 +1,12 @@
 import * as winston from "winston"
 
-const logger = winston
+const logger = winston.createLogger({
+  level: "debug",
+  format: winston.format.json(),
+  defaultMeta: { service: "user-service" },
+  transports: [],
+})
+
 require("winston-papertrail").Papertrail // tslint:disable-line
 
 import { PAPERTRAIL_PORT, PAPERTRAIL_URL } from "./globals"
