@@ -3,5 +3,8 @@
   "workspaces": [
     "dashboard",
     "api"
-  ]
+  ],
+  "scripts": {
+    "heroku-postbuild": "./scripts/heroku.build"
+  }
 }
