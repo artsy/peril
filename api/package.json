@@ -113,7 +113,8 @@
     "typescript": "^3.4.1",
     "winston": "^3.2.1",
     "winston-papertrail": "^1.0.5",
-    "ws": "^6.0.0"
+    "ws": "^6.0.0",
+    "jira-client": "6.4.1"
   },
   "devDependencies": {
     "@heroku/foreman": "^2.0.2",
