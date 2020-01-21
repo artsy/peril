@@ -6,5 +6,8 @@
   ],
   "scripts": {
     "heroku-postbuild": "./scripts/heroku.build"
+  },
+  "engines": {
+    "node": "10"
   }
 }
