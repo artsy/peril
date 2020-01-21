@@ -1,13 +1,15 @@
 import { fetch } from "../../api/fetch"
 import logger from "../../logger"
 
-export const graphqlAPI = (url: string, query: string) =>
-  fetch(`${url}/api/graphql`, {
+export const graphqlAPI = (url: string, query: string) => {
+  logger.info(`Making GraphQL API request to host ${url}, query: ${JSON.stringify({ query })}`)
+  return fetch(`${url}/api/graphql`, {
     method: "POST",
     body: JSON.stringify({ query }),
     headers: { "Content-Type": "application/json", Accept: "application/json" },
   })
     .then(res => {
+      logger.info(`Got GraphQL API result back: ${res}`)
       if (res.ok) {
         return res.json()
       } else {
@@ -25,3 +27,4 @@ export const graphqlAPI = (url: string, query: string) =>
       logger.error("Error making an API call to the GraphQL API")
       logger.error(e)
     })
+}
