@@ -1,12 +1,30 @@
-FROM node:10-slim
+FROM node:10-alpine
 
-ADD . /app
-WORKDIR /app/api
+WORKDIR /app
 
-# This will also trigger the build process
-RUN yarn install
+# Install system dependencies
+# Add deploy user
+RUN apk --no-cache --quiet add \
+  dumb-init && \
+  adduser -D -g '' deploy
 
-ENV PORT=80
-EXPOSE 80
+# Copy files required for installation of application dependencies
+COPY package.json yarn.lock ./
 
-CMD yarn start
+# Install application dependencies
+RUN yarn install --frozen-lockfile && yarn cache clean
+
+# Copy application code
+COPY . ./
+
+# Build application
+# Update file/directory permissions
+RUN yarn workspace dashboard build && \
+    yarn global add serve && \
+    chown -R deploy:deploy ./
+
+# Switch to less-privileged user
+USER deploy
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["yarn", "workspace", "api", "start"]
