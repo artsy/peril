@@ -2,7 +2,7 @@
 version: '2'
 services:
   {{ project_name }}:
-    command: ["yarn", "test"]
-    env_file: ../.env.test
+    command: ["yarn", "workspace", "api", "test"]
+    env_file: ../api/.env.test
     build:
       context: ../

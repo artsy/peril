@@ -1,9 +1,25 @@
 ---
 version: '2'
+volumes:
+  {{ project_name }}-mongodb-data-volume:
 services:
-  {{ project_name }}:
-    env_file: ../.env.development
+  {{ project_name }}-api:
+    env_file: ../api/.env.development
     build:
       context: ../
     ports:
-      - 3000:3000
+      - 5000:5000
+    depends_on:
+      - {{ project_name }}-mongodb
+  {{ project_name }}-dashboard:
+    env_file: ../dashboard/.env.development
+    command: ["yarn", "workspace", "dashboard", "start"]
+    build:
+      context: ../
+    ports:
+      - 5001:3000
+  {{ project_name }}-mongodb:
+    image: mongo:4.0
+    command: ["--storageEngine=mmapv1", "--quiet", "--nojournal"]
+    volumes:
+      - {{ project_name }}-mongodb-data-volume:/data/db
