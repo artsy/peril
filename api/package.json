@@ -31,7 +31,7 @@
     "url": "https://github.com/danger/peril.git"
   },
   "engines": {
-    "node": "10"
+    "node": "12"
   },
   "author": "Orta",
   "license": "MIT",
