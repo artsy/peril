@@ -55,12 +55,8 @@ spec:
             limits:
               memory: 512Mi
           readinessProbe:
-            httpGet:
+            tcpSocket:
               port: {{ project_name }}-http
-              path: /health/ping
-              httpHeaders:
-                - name: X-Forwarded-Proto
-                  value: https
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
