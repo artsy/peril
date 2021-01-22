@@ -22,6 +22,8 @@ RUN yarn global add react-scripts serve && \
 COPY . ./
 
 ENV SKIP_PREFLIGHT_CHECK=true
+ENV REACT_APP_PUBLIC_API_ROOT_URL="https://peril-api-staging.artsy.net"
+ENV REACT_APP_PUBLIC_WEB_ROOT_URL='https://peril-staging.artsy.net'
 
 # Build application
 # Update file/directory permissions
