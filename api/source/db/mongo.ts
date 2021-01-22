@@ -54,7 +54,7 @@ const Installation = model<MongoGithubInstallationModel>(
   })
 )
 
-/* 
+/*
  * Basically, Mongo does not allow you to have a key with a '.' in it. This
  * isn't great for us, because 'x.y' is real common, so, we amend the keys in
  * the JSON on load/save to ensure it can be saved.
