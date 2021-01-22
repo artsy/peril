@@ -244,7 +244,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: {{ project_name }}-staging-api.artsy.net
+    - host: {{ project_name }}-api-staging.artsy.net
       http:
         paths:
           - path: /
