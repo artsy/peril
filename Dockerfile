@@ -28,6 +28,7 @@ ENV REACT_APP_PUBLIC_WEB_ROOT_URL='https://peril-staging.artsy.net'
 # Build application
 # Update file/directory permissions
 RUN yarn workspace dashboard build && \
+    yarn workspace api build && \
   chown -R deploy:deploy ./
 
 # Switch to less-privileged user
