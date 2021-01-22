@@ -1,93 +1,52 @@
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-
 version: 2.1
 
-executors:
-  node:
-    parameters:
-      dir:
-        description: The working directory to use
-        type: string
-    docker:
-      - image: circleci/node:10
-    working_directory: ~/repo/<< parameters.dir >>
-    
-commands:
-  yarn-install:
-    description: A command that handles installing and caching npm packages
-    parameters:
-      cache-key:
-        description: String to differentiate caches
-        type: string
-    steps:
-      - checkout:
-            path: ~/repo
-      - restore_cache:
-          keys:
-            - v1-<< parameters.cache-key >>-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-<< parameters.cache-key >>-dependencies-
-      - run: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-<< parameters.cache-key >>-dependencies-{{ checksum "package.json" }}
-    
+orbs:
+  hokusai: artsy/hokusai@0.7
+  horizon: artsy/release@0.0.1
 
-jobs:
-  #  The Peril web server
-  api:
-    executor:
-      name: node
-      dir: api
+not_staging_or_release: &not_staging_or_release
+  filters:
+    branches:
+      ignore:
+        - staging
+        - release
 
-    steps:
-      - yarn-install:
-          cache-key: api
-      - run: yarn jest --max-workers=2
+only_master: &only_master
+  context: hokusai
+  filters:
+    branches:
+      only: master
 
-  #  The Peril admin dashboard
-  dashboard:
-    executor:
-      name: node
-      dir: dashboard
-
-    steps:
-      - yarn-install:
-          cache-key: dash
-      - run: yarn build
-
-  #  The Peril public front-end
-  web:
-    executor:
-      name: node
-      dir: web
-
-    steps:
-      - yarn-install:
-          cache-key: web
-      - run: yarn build
-      - run: yarn jest  --max-workers=2
-      
-  deploy:
-    executor:
-      name: node
-      dir: ''
-    steps:
-      - run: echo "deploy here..."
-       
+only_release: &only_release
+  context: hokusai
+  filters:
+    branches:
+      only: release
 
 workflows:
-  build:
+  build-deploy:
     jobs:
-      - api
-      - dashboard
-      - web
-      - deploy:
-          filters:
-            branches:
-              only: master
+      - horizon/block:
+          <<: *only_release
+          context: horizon
+          project_id: REPLACE_ME
+
+      - hokusai/test:
+          <<: *not_staging_or_release
+
+      - hokusai/push:
+          name: push-staging-image
+          <<: *only_master
           requires:
-            - api
-            - dashboard
-            - web
+            - hokusai/test
+
+      - hokusai/deploy-staging:
+          <<: *only_master
+          project-name: peril
+          requires:
+            - push-staging-image
+
+      - hokusai/deploy-production:
+          <<: *only_release
+          requires:
+            - horizon/block

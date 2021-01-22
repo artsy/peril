@@ -10,6 +10,7 @@
     "allowJs": true,
     "strictNullChecks": true,
     "alwaysStrict": true,
+    "noEmitOnError": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,

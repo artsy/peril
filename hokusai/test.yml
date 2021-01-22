@@ -1,0 +1,7 @@
+---
+version: '2'
+services:
+  {{ project_name }}:
+    command: ["yarn", "workspace", "api", "test"]
+    build:
+      context: ../
