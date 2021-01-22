@@ -36,6 +36,7 @@
   "author": "Orta",
   "license": "MIT",
   "dependencies": {
+    "@graphql-inspector/core": "^2.3.0",
     "@octokit/app": "^3.0.2",
     "@peril/utils": "^1.0.2",
     "@sentry/node": "^5.5.0",
