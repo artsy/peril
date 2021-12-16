@@ -13,7 +13,7 @@ export interface RepresentationForURL {
 export const dangerRepresentationForPath = (value: string): RepresentationForURL => {
   const afterAt = value.includes("@") ? value.split("@")[1] : value
   return {
-    branch: value.includes("#") ? value.split("#")[1] : "master",
+    branch: value.includes("#") ? value.split("#")[1] : "main",
     dangerfilePath: afterAt.split("#")[0],
     repoSlug: value.includes("@") ? value.split("@")[0] : undefined,
     referenceString: value,

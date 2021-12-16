@@ -101,7 +101,8 @@ class Websocket extends React.Component<Props, State> {
 
 export default createFragmentContainer<Props>(
   Websocket,
-{ installation:  graphql`
+  {
+    installation: graphql`
     fragment Websocket_installation on Installation {
       iID
       perilSettingsJSONURL
@@ -147,7 +148,7 @@ interface MSGDangerfileLog {
 export const dangerRepresentationForPath = (value: string) => {
   const afterAt = value.includes("@") ? value.split("@")[1] : value
   return {
-    branch: value.includes("#") ? value.split("#")[1] : "master",
+    branch: value.includes("#") ? value.split("#")[1] : "main",
     dangerfilePath: afterAt.split("#")[0],
     repoSlug: value.includes("@") ? value.split("@")[0] : undefined,
     referenceString: value,
@@ -158,7 +159,7 @@ const dangerfileRefToHref = (settingsPath: string, dangerfile: string) => {
   const settingsJSON = dangerRepresentationForPath(settingsPath)
   const dangerfileRep = dangerRepresentationForPath(dangerfile)
   const repo = dangerfileRep.repoSlug || settingsJSON.repoSlug!
-  const ref = dangerfileRep.branch || "master"
+  const ref = dangerfileRep.branch || "main"
   // e.g.
   // https://github.com/danger/dashboard.peril.systems/blob/[sha]/src/components/installation/Websocket.tsx
   const url = `https://github.com/${repo}/blob/${ref}/${dangerfileRep.dangerfilePath}`

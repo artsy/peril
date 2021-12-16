@@ -24,7 +24,7 @@ export const sendPRForPerilSettingsRepo = async (installationID: number, options
       owner: installation.login,
       repo: options.repo.name,
       title: "Initial setup for your Peril Repo",
-      baseBranch: "master",
+      baseBranch: "main",
       commitMessage: "Initial Commit",
       body: "Welcome to Peril",
       newBranchName: "peril_settings_init",

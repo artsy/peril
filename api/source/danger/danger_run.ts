@@ -168,7 +168,7 @@ export const dangerRepresentationForPath = (value: DangerfileReferenceString): R
   let afterAt = value.includes("@") ? value.split("@")[1] : value
   afterAt = afterAt.startsWith("/") ? afterAt.substring(1) : afterAt
   return {
-    branch: value.includes("#") ? value.split("#")[1] : "master",
+    branch: value.includes("#") ? value.split("#")[1] : "main",
     dangerfilePath: afterAt.split("#")[0],
     repoSlug: value.includes("@") ? value.split("@")[0] : undefined,
     referenceString: value,

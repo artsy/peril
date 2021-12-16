@@ -42,7 +42,7 @@ const recreateGitHubUtils = (api: NodeGithub): GitHubUtilsDSL => ({
     if (!repoSlug) {
       throw new Error("Need a repo slug")
     }
-    const ref = branch || "master"
+    const ref = branch || "main"
 
     const toHref = (path: string) => `https://github.com/${repoSlug}/blob/${ref}/${path}`
     // As we should only be getting paths we can ignore the nullability

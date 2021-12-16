@@ -92,5 +92,5 @@ const refFromEvent = (event: any): string => {
   if (event.sha) {
     return event.sha
   }
-  return "master"
+  return "main"
 }

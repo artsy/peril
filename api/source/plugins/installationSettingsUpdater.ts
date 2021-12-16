@@ -63,7 +63,7 @@ export const installationSettingsUpdater = async (
       const repo = rep.repoSlug
       const path = rep.dangerfilePath
 
-      if (hookRepo === repo && ref === "refs/heads/master") {
+      if (hookRepo === repo && ref === "refs/heads/main") {
         const commits = req.body.commits as any[]
         const modifiedPerilSettings = commits.find(c => c.modified.includes(path))
         if (modifiedPerilSettings) {

@@ -156,10 +156,9 @@ const validateRuns = async (
     }
 
     if (headDangerfile === "") {
-      const actualBranch = branch ? branch : "master"
-      const message = `Could not find Dangerfile at <code>${
-        run.dangerfilePath
-      }</code> on <code>${repoForDangerfileRun}</code> on branch <code>${actualBranch}</code>`
+      const actualBranch = branch ? branch : "main"
+      const message = `Could not find Dangerfile at <code>${run.dangerfilePath
+        }</code> on <code>${repoForDangerfileRun}</code> on branch <code>${actualBranch}</code>`
 
       const report = reportData(message)
       return {
