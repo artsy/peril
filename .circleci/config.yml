@@ -26,27 +26,12 @@ only_release: &only_release
 workflows:
   build-deploy:
     jobs:
-      - horizon/block:
-          <<: *only_release
-          context: horizon
-          project_id: REPLACE_ME
-
-      - hokusai/test:
-          <<: *not_staging_or_release
-
       - hokusai/push:
           name: push-staging-image
           <<: *only_main
-          requires:
-            - hokusai/test
 
       - hokusai/deploy-staging:
           <<: *only_main
           project-name: peril
           requires:
             - push-staging-image
-
-      - hokusai/deploy-production:
-          <<: *only_release
-          requires:
-            - horizon/block
