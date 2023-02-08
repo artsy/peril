@@ -48,7 +48,7 @@
     "graphql-tools": "3.1.1",
     "graphql-tools-types": "1.1.26",
     "json5": "2.2.2",
-    "jsonwebtoken": "8.5.1",
+    "jsonwebtoken": "9.0.0",
     "lodash": "4.17.11",
     "mongoose": "5.13.15",
     "node-fetch": "2.3.0",
