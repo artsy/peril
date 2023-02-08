@@ -103,7 +103,7 @@
     "jest": "^24.5.0",
     "jira-client": "6.4.1",
     "json2ts": "orta/json2ts#ts-less",
-    "json5": "^2.0.1",
+    "json5": "^2.2.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.10",
     "mongoose": "^5.13.15",
