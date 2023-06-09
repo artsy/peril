@@ -30,7 +30,7 @@
     "@types/react-redux": "^5.0.21",
     "@types/semantic-ui": "^2.2.6",
     "change-case": "^3.0.1",
-    "gatsby": "2.0.118",
+    "gatsby": "4.25.7",
     "gatsby-link": "2.0.10",
     "gatsby-plugin-glamor": "2.0.8",
     "gatsby-plugin-google-analytics": "2.0.13",
