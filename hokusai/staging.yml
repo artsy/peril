@@ -237,7 +237,7 @@ spec:
   type: ClusterIP
 
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ project_name }}
@@ -250,13 +250,17 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              serviceName: {{ project_name }}-api-internal
-              servicePort: http
+              service:
+                name: {{ project_name }}-api-internal
+                port:
+                  name: http
     - host: {{ project_name }}-staging.artsy.net
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
-              serviceName: {{ project_name }}-web-internal
-              servicePort: http
+              service:
+              name: {{ project_name }}-web-internal
+                port:
+                name: http
