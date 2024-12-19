@@ -27,6 +27,22 @@ spec:
         layer: application
       name: {{ project_name }}-api
     spec:
+      initContainers:
+      - name: setenv
+        image: 585031190124.dkr.ecr.us-east-1.amazonaws.com/fortress:staging
+        imagePullPolicy: Always
+        command:
+        - python
+        - src/load/load.py
+        - kubernetes
+        - staging
+        - peril
+        envFrom:
+        - configMapRef:
+            name: secrets-config
+        volumeMounts:
+        - name: secrets
+          mountPath: /secrets
       containers:
       - name: {{ project_name }}-api
         args: ["yarn", "workspace", "api", "start"]
@@ -43,7 +59,13 @@ spec:
           value: "--max_old_space_size=256"
         envFrom:
         - configMapRef:
+            name: secrets-config
+        - configMapRef:
             name: {{ project_name }}-environment
+        volumeMounts:
+        - name: secrets
+          mountPath: /secrets
+          readOnly: true
         image: {{ project_repo }}:staging
         imagePullPolicy: Always
         ports:
@@ -70,6 +92,7 @@ spec:
         options:
         - name: ndots
           value: "1"
+      serviceAccountName: peril
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -79,6 +102,9 @@ spec:
                 operator: In
                 values:
                 - foreground
+      volumes:
+      - name: secrets
+        emptyDir: {}
 
 ---
 apiVersion: apps/v1
@@ -109,6 +135,22 @@ spec:
         layer: application
       name: {{ project_name }}-web
     spec:
+      initContainers:
+      - name: setenv
+        image: 585031190124.dkr.ecr.us-east-1.amazonaws.com/fortress:staging
+        imagePullPolicy: Always
+        command:
+        - python
+        - src/load/load.py
+        - kubernetes
+        - staging
+        - peril
+        envFrom:
+        - configMapRef:
+            name: secrets-config
+        volumeMounts:
+        - name: secrets
+          mountPath: /secrets
       containers:
       - name: {{ project_name }}-web
         args: ["yarn", "workspace", "dashboard", "start"]
@@ -125,7 +167,13 @@ spec:
           value: "--max_old_space_size=256"
         envFrom:
         - configMapRef:
+            name: secrets-config
+        - configMapRef:
             name: {{ project_name }}-environment
+        volumeMounts:
+        - name: secrets
+          mountPath: /secrets
+          readOnly: true
         image: {{ project_repo }}:staging
         imagePullPolicy: Always
         ports:
@@ -152,6 +200,7 @@ spec:
         options:
         - name: ndots
           value: "1"
+      serviceAccountName: peril
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -161,6 +210,9 @@ spec:
                 operator: In
                 values:
                 - foreground
+      volumes:
+      - name: secrets
+        emptyDir: {}
 
 ---
 apiVersion: autoscaling/v1
