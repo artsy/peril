@@ -34,5 +34,5 @@ RUN yarn workspace dashboard build && \
 # Switch to less-privileged user
 USER deploy
 
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+ENTRYPOINT ["/usr/bin/dumb-init", "./scripts/load_secrets_and_run.sh"]
 CMD ["yarn", "workspace", "api", "start"]
