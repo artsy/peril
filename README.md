@@ -2,9 +2,12 @@
   <img src="http://danger.systems/images/js/peril-logo-hero-cachable@2x.png" width=250/>
 </p>
 
-[per·il](https://en.oxforddictionaries.com/definition/peril) **ˈperəl** _noun_
-
-1.  serious and immediate danger. _"their family was in peril"_.
+### Meta
+- Dashboard: [peril-staging.artsy.net](https://peril-staging.artsy.net)
+- [peril-api-staging.artsy.net](https://peril-api-staging.artsy.net)
+- [K8 Dashboard (Staging)](https://kubernetes.stg.artsy.systems/?un72uvjd4ky7kvwnlfgvhnr3fm=Te7vEthDlCN0HziKnv-Mqyzg6Lz-NXE-K4eTW_UqTpWfTbN09gz8XXHk8L-3XLyNl-VXedKK#/search?namespace=default&q=peril)
+- See: [Peril Settings Repo](https://github.com/artsy/peril-settings)
+- Point People: [@dblandin](https://github.com/dblandin), [@damassi](https://github.com/damassi)
 
 ---
 
