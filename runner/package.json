@@ -38,7 +38,7 @@
     "danger": "7.0.19",
     "debug": "4.1.1",
     "dotenv": "5.0.1",
-    "express": "4.16.4",
+    "express": "4.17.3",
     "express-x-hub": "1.0.4",
     "github-webhook-event-types": "1.2.1",
     "graphql": "0.13.2",
