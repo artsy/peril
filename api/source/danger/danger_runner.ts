@@ -119,7 +119,7 @@ export async function runDangerAgainstFileInline(
   try {
     results = await exec.runner.runDangerfileEnvironment(filepath, contents, dangerRuntimeEnv, payload.webhook)
   } catch (error) {
-    results = resultsForCaughtError(filepath.join(","), contents.join("\n---\n"), error)
+    results = resultsForCaughtError(filepath.join(","), contents.join("\n---\n"), error as Error)
   }
   return results
 }

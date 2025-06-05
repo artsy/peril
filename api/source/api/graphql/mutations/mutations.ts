@@ -69,7 +69,7 @@ export const mutations = {
       // Reset the perilSettingsJSONURL so that the next one starts from scratch.
       await db.saveInstallation({ perilSettingsJSONURL: undefined })
       return {
-        error: { description: error.message },
+        error: { description: error instanceof Error ? error.message : String(error) },
       }
     }
   }),
@@ -88,7 +88,7 @@ export const mutations = {
       return updatedInstallation
     } catch (error) {
       return {
-        error: { description: error.message },
+        error: { description: error instanceof Error ? error.message : String(error) },
       }
     }
   }),

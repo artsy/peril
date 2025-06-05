@@ -22,7 +22,7 @@ export const runDangerfileTaskName = "runDangerfile"
 export const startTaskScheduler = async () => {
   agenda = new (Agenda as any)({ db: { address: MONGODB_URI }, processEvery: "3 minutes" }) // 5s
 
-  agenda.on("error", err => {
+  agenda.on("error", (err: any) => {
     logger.error("Error with Agenda", err)
   })
 
