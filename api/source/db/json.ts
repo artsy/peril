@@ -42,6 +42,15 @@ export const jsonDatabase = (dangerFilePath: DangerfileReferenceString): Databas
     return org
   },
 
+  /** Gets a set of installations by their IDs */
+  getInstallations: async (_: number[]): Promise<GitHubInstallation[]> => {
+    if (!org) {
+      const db = await getDB()
+      await db.setup()
+    }
+    return [org]
+  },
+
   /** Deletes an Integration */
   deleteInstallation: async (_: number) => {
     info(`Skipping saving github repo with slug.`)

@@ -48,7 +48,7 @@ it("handles a platform only run", () => {
   expect(runs).toEqual([
     {
       action: "opened",
-      branch: "master",
+      branch: "main",
       dangerfilePath: "pr.ts",
       dslType: 0,
       event: "pull_request",
@@ -92,7 +92,7 @@ it("gets the expected runs for platform + repo rules", () => {
   expect(runs).toEqual([
     {
       action: "opened",
-      branch: "master",
+      branch: "main",
       dangerfilePath: "pr.ts",
       dslType: 0,
       event: "pull_request",
@@ -102,7 +102,7 @@ it("gets the expected runs for platform + repo rules", () => {
     },
     {
       action: "opened",
-      branch: "master",
+      branch: "main",
       dangerfilePath: "pr.ts",
       dslType: 0,
       event: "pull_request",
@@ -140,7 +140,7 @@ it("gets the expected runs for installation only", () => {
   expect(runs).toEqual([
     {
       action: "opened",
-      branch: "master",
+      branch: "main",
       dangerfilePath: "pr.ts",
       dslType: 0,
       event: "pull_request",
