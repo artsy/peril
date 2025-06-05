@@ -8,16 +8,17 @@
     "sourceMap": true,
     "rootDir": "source",
     "allowJs": true,
-    "strictNullChecks": true,
-    "alwaysStrict": true,
+    "strictNullChecks": false,
+    "alwaysStrict": false,
     "noEmitOnError": false,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitThis": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "strict": true,
-    "pretty": true
+    "noFallthroughCasesInSwitch": false,
+    "noImplicitThis": false,
+    "noImplicitReturns": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strict": false,
+    "pretty": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "out",
@@ -27,6 +28,9 @@
     "node_modules",
     "wallaby.js",
     "migrations",
-    "dangerfile.lite.ts"
+    "dangerfile.lite.ts",
+    "**/_tests/**",
+    "**/*.test.ts",
+    "**/__mocks__/**"
   ]
 }

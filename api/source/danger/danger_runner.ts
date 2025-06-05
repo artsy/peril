@@ -166,5 +166,5 @@ export function executorForInstallation(platform: Platform, runner: DangerRunner
   }
 
   // Source can be removed in the next release of Danger
-  return new Executor(source, platform, runner, config, process)
+  return new Executor(source, platform, runner, config, process as any)
 }

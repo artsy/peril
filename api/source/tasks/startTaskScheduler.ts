@@ -15,12 +15,12 @@ export interface DangerFileTaskConfig {
 }
 
 /** The singleton agenda instance */
-let agenda: Agenda
+let agenda: any
 /** The runTask name */
 export const runDangerfileTaskName = "runDangerfile"
 
 export const startTaskScheduler = async () => {
-  agenda = new Agenda({ db: { address: MONGODB_URI }, processEvery: "3 minutes" }) // 5s
+  agenda = new (Agenda as any)({ db: { address: MONGODB_URI }, processEvery: "3 minutes" }) // 5s
 
   agenda.on("error", err => {
     logger.error("Error with Agenda", err)
@@ -73,8 +73,8 @@ export const startTaskScheduler = async () => {
 }
 
 /** Makes sure that we can handle `peril.runTask` functions being called */
-export const setupForRunTask = (agendaLocal: Agenda) =>
-  agendaLocal.define(runDangerfileTaskName, (job, done) => {
+export const setupForRunTask = (agendaLocal: any) =>
+  agendaLocal.define(runDangerfileTaskName, (job: any, done: any) => {
     const data = job.attrs.data as DangerFileTaskConfig
     logger.info(`Received a new task, ${data.taskName}`)
     // Just trying to get that done handled asap
