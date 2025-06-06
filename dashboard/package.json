@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "schema:download:staging": "yarn graphql get-schema -e https://staging-api.peril.systems/api/graphql -o relay_data/schema.graphql --no-all",
