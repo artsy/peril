@@ -28,7 +28,7 @@ const go = async () => {
 
     yarn.on("close", code => {
       log(`child process exited with code ${code}`)
-      process.exit(code)
+      process.exit(code || 0)
     })
   } else {
     log("Not adding any plugins")

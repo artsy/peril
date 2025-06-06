@@ -142,6 +142,8 @@ export interface DatabaseAdaptor {
 
   /** Gets an integrations settings */
   getInstallation: (installationID: number) => Promise<GitHubInstallation | null>
+  /** Gets a set of installations by their IDs */
+  getInstallations: (installationIDs: number[]) => Promise<GitHubInstallation[]>
   /** Updates an integrations settings */
   updateInstallation: (installationID: number) => Promise<GitHubInstallation | null>
   /** Saves an Integration */

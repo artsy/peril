@@ -8,7 +8,7 @@ describe("for ping", () => {
     expect(dangerRunForRules("ping", null, rules, {})).toEqual([
       {
         action: null,
-        branch: "master",
+        branch: "main",
         dangerfilePath: "dangerfile.js",
         dslType: RunType.import,
         event: "ping",
@@ -31,7 +31,7 @@ describe("for PRs", () => {
     expect(dangerRunForRules("pull_request", "opened", rules, {})).toEqual([
       {
         action: "opened",
-        branch: "master",
+        branch: "main",
         dangerfilePath: "dangerfile.js",
         dslType: RunType.pr,
         event: "pull_request",
@@ -56,7 +56,7 @@ describe("for PRs", () => {
     expect(dangerRunForRules("pull_request", "updated", rules, {})).toEqual([
       {
         action: "updated",
-        branch: "master",
+        branch: "main",
         dangerfilePath: "dangerfile.js",
         dslType: RunType.pr,
         event: "pull_request",
@@ -77,7 +77,7 @@ describe("for PRs", () => {
     expect(dangerRunForRules("pull_request", "deleted", rules, {})).toEqual([
       {
         action: "deleted",
-        branch: "master",
+        branch: "main",
         dangerfilePath: "dangerfile.js",
         dslType: RunType.pr,
         event: "pull_request",
@@ -105,7 +105,7 @@ describe("for PRs", () => {
     expect(dangerRunForRules("pull_request", "created", rules, {})).toEqual([
       {
         action: "created",
-        branch: "master",
+        branch: "main",
         dangerfilePath: "dangerfile.js",
         dslType: RunType.pr,
         event: "pull_request",
@@ -174,7 +174,7 @@ describe("for PRs", () => {
     expect(dangerRunForRules("pull_request", "opened", rules, {})).toEqual([
       {
         action: "opened",
-        branch: "master",
+        branch: "main",
         dangerfilePath: "dangerfile.js",
         dslType: RunType.pr,
         event: "pull_request",
@@ -225,10 +225,10 @@ describe("for PRs", () => {
 })
 
 describe("dangerRepresentationforPath", () => {
-  it("returns just the path with master and no repo with just a path", () => {
+  it("returns just the path with main and no repo with just a path", () => {
     const path = "dangerfile.ts"
     expect(dangerRepresentationForPath(path)).toEqual({
-      branch: "master",
+      branch: "main",
       dangerfilePath: "dangerfile.ts",
       referenceString: "dangerfile.ts",
       repoSlug: undefined,
@@ -238,7 +238,7 @@ describe("dangerRepresentationforPath", () => {
   it("returns the path and repo", () => {
     const path = "orta/eigen@dangerfile.ts"
     expect(dangerRepresentationForPath(path)).toEqual({
-      branch: "master",
+      branch: "main",
       dangerfilePath: "dangerfile.ts",
       referenceString: "orta/eigen@dangerfile.ts",
       repoSlug: "orta/eigen",

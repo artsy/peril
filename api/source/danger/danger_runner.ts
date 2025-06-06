@@ -119,7 +119,7 @@ export async function runDangerAgainstFileInline(
   try {
     results = await exec.runner.runDangerfileEnvironment(filepath, contents, dangerRuntimeEnv, payload.webhook)
   } catch (error) {
-    results = resultsForCaughtError(filepath.join(","), contents.join("\n---\n"), error)
+    results = resultsForCaughtError(filepath.join(","), contents.join("\n---\n"), error as Error)
   }
   return results
 }
@@ -166,5 +166,5 @@ export function executorForInstallation(platform: Platform, runner: DangerRunner
   }
 
   // Source can be removed in the next release of Danger
-  return new Executor(source, platform, runner, config, process)
+  return new Executor(source, platform, runner, config, process as any)
 }

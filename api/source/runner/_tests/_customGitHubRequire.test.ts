@@ -44,7 +44,7 @@ describe("customGitHubResolveRequest", () => {
     expect(mockGH).toBeCalledWith(
       token,
       {
-        branch: "master",
+        branch: "main",
         dangerfilePath: "myapp/peril-resolver.js",
         referenceString: "orta/peril-settings@/myapp/peril-resolver.js",
         repoSlug: "orta/peril-settings",

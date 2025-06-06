@@ -17,7 +17,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
-    "pretty": true
+    "pretty": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "out",

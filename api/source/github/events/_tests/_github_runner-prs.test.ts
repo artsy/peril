@@ -47,8 +47,10 @@ it("runs a Dangerfile for a PR with a local", async () => {
   )[0]
 
   await runPRRun("eventName", [run], settings, "token", body.pull_request)
-  const call = mockRunner.mock.calls[0]
   expect(mockRunner).toBeCalled()
+  const calls = mockRunner.mock.calls
+  expect(calls.length).toBeGreaterThan(0)
+  const call = calls[0] as any
   expect(call[1]).toEqual(["fail('dangerfile')"])
   expect(call[2]).toEqual(["dangerfile.pr"])
 })

@@ -198,16 +198,15 @@ export const mongoDatabase = {
 
     const parsedSettings: Partial<GitHubInstallation> = _.pick(json, userInput)
     const sanitizedSettings = prepareToSave(parsedSettings)
-    return (await Installation.updateOne({ iID: installationID }, sanitizedSettings)) as Promise<
-      MongoGithubInstallationModel
-    >
+    await Installation.updateOne({ iID: installationID }, sanitizedSettings)
+    return (await Installation.findOne({ iID: installationID })) as MongoGithubInstallationModel
   },
 
   /** Deletes an Integration */
   deleteInstallation: async (installationID: number) => {
     const dbInstallation = await Installation.findOne({ iID: installationID })
     if (dbInstallation) {
-      await dbInstallation.remove()
+      await dbInstallation.deleteOne()
     }
   },
 }

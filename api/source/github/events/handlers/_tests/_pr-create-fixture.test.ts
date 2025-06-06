@@ -3,7 +3,7 @@ import { format } from "prettier"
 jest.mock("../../../../db/getDB")
 import { MockDB } from "../../../../db/__mocks__/getDB"
 import { getDB } from "../../../../db/getDB"
-const mockDB = getDB() as MockDB
+const mockDB = getDB() as unknown as MockDB
 
 jest.mock("../../../../runner/runFromSameHost")
 import { runFromSameHost } from "../../../../runner/runFromSameHost"
@@ -23,6 +23,7 @@ const mockGetGitHubFileContents: any = getGitHubFileContents
 import { readFileSync, writeFileSync } from "fs"
 import { resolve } from "path"
 import { dangerRunForRules } from "../../../../danger/danger_run"
+import { generateInstallation } from "../../../../testing/installationFactory"
 
 import { PerilRunnerBootstrapJSON } from "../../../../runner/triggerSandboxRun"
 import { setupForRequest } from "../../github_runner"
@@ -45,7 +46,7 @@ const fixture = (file: string) => JSON.parse(readFileSync(resolve(apiFixtures, f
 it("passes the right args to the hyper functions when it's a PR", async () => {
   ;(createPRDSL as jest.Mock).mockResolvedValue({})
 
-  mockDB.getInstallation.mockReturnValue({ iID: "123", repos: {}, envVars: { hello: "world" } })
+  mockDB.getInstallation.mockReturnValue(Promise.resolve(generateInstallation({ iID: 123, repos: {}, envVars: { hello: "world" } })))
 
   const body = fixture("pull_request_opened.json")
   const req = { body, headers: { "X-GitHub-Delivery": "123" } } as any
@@ -72,7 +73,7 @@ it("passes the right args to the hyper functions when it's a PR", async () => {
 
 it("catches error from missing PR", async () => {
   ;(createPRDSL as jest.Mock).mockRejectedValue({})
-  mockDB.getInstallation.mockReturnValue({ iID: "123", repos: {}, envVars: { hello: "world" } })
+  mockDB.getInstallation.mockReturnValue(Promise.resolve(generateInstallation({ iID: 123, repos: {}, envVars: { hello: "world" } })))
 
   const body = fixture("pull_request_opened.json")
   const req = { body, headers: { "X-GitHub-Delivery": "123" } } as any

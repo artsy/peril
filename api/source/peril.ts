@@ -42,7 +42,7 @@ export const peril = () => {
   const app = express()
   app.set("port", process.env.PORT || 5000)
   app.use(xhub({ algorith: "sha1", secret: PERIL_WEBHOOK_SECRET }))
-  app.use(bodyParser.json({ limit: "5mb" }))
+  app.use(bodyParser.json({ limit: "5mb" }) as any)
   app.use(express.static("public"))
 
   app.post("/webhook", githubRouter)

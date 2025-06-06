@@ -3,11 +3,13 @@ import { format } from "prettier"
 jest.mock("../../../../db/getDB")
 import { MockDB } from "../../../../db/__mocks__/getDB"
 import { getDB } from "../../../../db/getDB"
-const mockDB = getDB() as MockDB
+const mockDB = getDB() as unknown as MockDB
 
 jest.mock("../../../../api/github", () => ({
   getTemporaryAccessTokenForInstallation: () => Promise.resolve("12345"),
 }))
+
+import { generateInstallation } from "../../../../testing/installationFactory"
 
 jest.mock("../../../../runner/runFromSameHost")
 import { runFromSameHost } from "../../../../runner/runFromSameHost"
@@ -31,7 +33,7 @@ const apiFixtures = resolve(__dirname, "../../_tests/fixtures")
 const fixture = (file: string) => JSON.parse(readFileSync(resolve(apiFixtures, file), "utf8"))
 
 it("passes the right args to the hyper functions", async () => {
-  mockDB.getInstallation.mockReturnValue({ iID: "123", repos: {}, envVars: { hello: "world" } })
+  mockDB.getInstallation.mockReturnValue(Promise.resolve(generateInstallation({ iID: 123, repos: {}, envVars: { hello: "world" } })))
 
   const body = fixture("issue_comment_created.json")
   const req = { body, headers: { "X-GitHub-Delivery": "123" } } as any
@@ -52,7 +54,7 @@ it("passes the right args to the hyper functions", async () => {
 
   // Ensure Github API is set before clearing it for the snapshot
   expect((payload.payload.dsl as DangerDSLJSONType).github!.api).toBeDefined()
-  delete (payload.payload.dsl as DangerDSLJSONType).github!.api
+  delete (payload.payload.dsl as any).github!.api
 
   writeFileSync(
     __dirname + "/fixtures/PerilRunnerEventBootStrapExample.json",

@@ -16,6 +16,7 @@ const mockGetGitHubFileContents: any = getGitHubFileContents
 import { readFileSync } from "fs"
 import { resolve } from "path"
 import { dangerRunForRules } from "../../../../danger/danger_run"
+import { generateInstallation } from "../../../../testing/installationFactory"
 import { triggerSandboxDangerRun } from "../../../../runner/triggerSandboxRun"
 import { setupForRequest } from "../../github_runner"
 import { runEventRun } from "../event"
@@ -28,7 +29,7 @@ const apiFixtures = resolve(__dirname, "../../_tests/fixtures")
 const fixture = (file: string) => JSON.parse(readFileSync(resolve(apiFixtures, file), "utf8"))
 
 it("sets up the right call to trigger sandbox run", async () => {
-  mockDB.getInstallation.mockReturnValueOnce({ iID: "123", repos: {} })
+  mockDB.getInstallation.mockReturnValueOnce(Promise.resolve(generateInstallation({ iID: 123, repos: {} })))
 
   const body = fixture("issue_comment_created.json")
   const req = { body, headers: { "X-GitHub-Delivery": "123" } } as any
