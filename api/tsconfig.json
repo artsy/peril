@@ -10,7 +10,7 @@
     "allowJs": true,
     "strictNullChecks": true,
     "alwaysStrict": true,
-    "noEmitOnError": true,
+    "noEmitOnError": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
@@ -28,9 +28,6 @@
     "node_modules",
     "wallaby.js",
     "migrations",
-    "dangerfile.lite.ts",
-    "**/_tests/**",
-    "**/*.test.ts",
-    "**/__mocks__/**"
+    "dangerfile.lite.ts"
   ]
 }
