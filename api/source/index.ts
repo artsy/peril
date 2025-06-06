@@ -1,4 +1,4 @@
-import * as cluster from "cluster"
+import cluster from "cluster"
 import * as os from "os"
 
 import logger from "./logger"
@@ -11,27 +11,21 @@ const log = (message: string) => {
   }
 }
 
-// Type the cluster as any to handle the version differences
-const clusterAny = cluster as any
-
-// Use isPrimary for newer Node.js versions, fallback to isMaster for older versions
-const isPrimary = 'isPrimary' in cluster ? clusterAny.isPrimary : clusterAny.isMaster
-
-if (isPrimary) {
-  log(`[CLUSTER] Master cluster setting up ${WORKERS} workers...`)
+if (cluster.isMaster) {
+  log(`[CLUSTER] Master process setting up ${WORKERS} workers...`)
   for (let i = 0; i < WORKERS; i++) {
-    clusterAny.fork() // create a worker
+    cluster.fork() // create a worker
   }
 
-  clusterAny.on("online", (worker: any) => {
+  cluster.on("online", (worker) => {
     log(`[CLUSTER] Worker ${worker.process.pid} is online`)
   })
 
-  clusterAny.on("exit", (worker: any, code: any, signal: any) => {
+  cluster.on("exit", (worker, code, signal) => {
     log(`[CLUSTER] Worker ${worker.process.pid} died with code: ${code}, and signal: ${signal}`)
     log("[CLUSTER] Starting a new worker")
     // start a new worker when it crashes
-    clusterAny.fork()
+    cluster.fork()
   })
 } else {
   peril()
