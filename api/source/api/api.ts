@@ -55,7 +55,7 @@ export const setupPublicAPI = (app: Application) => {
   app.use(
     "/api/graphql",
     cors(),
-    bodyParser.json(),
+    bodyParser.json() as any,
     graphqlExpress(req => ({
       schema,
       context: {

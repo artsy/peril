@@ -206,7 +206,7 @@ export const mongoDatabase = {
   deleteInstallation: async (installationID: number) => {
     const dbInstallation = await Installation.findOne({ iID: installationID })
     if (dbInstallation) {
-      await dbInstallation.remove()
+      await dbInstallation.deleteOne()
     }
   },
 }

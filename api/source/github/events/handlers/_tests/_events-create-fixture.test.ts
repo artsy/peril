@@ -54,7 +54,7 @@ it("passes the right args to the hyper functions", async () => {
 
   // Ensure Github API is set before clearing it for the snapshot
   expect((payload.payload.dsl as DangerDSLJSONType).github!.api).toBeDefined()
-  delete (payload.payload.dsl as DangerDSLJSONType).github!.api
+  delete (payload.payload.dsl as any).github!.api
 
   writeFileSync(
     __dirname + "/fixtures/PerilRunnerEventBootStrapExample.json",
