@@ -23,4 +23,3 @@ services:
     command: ["--storageEngine=mmapv1", "--quiet"]
     volumes:
       - {{ project_name }}-mongodb-data-volume:/data/db
-      
