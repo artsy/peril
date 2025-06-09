@@ -5,6 +5,7 @@ import { schema } from "../../index"
 jest.mock("../../../../db/getDB")
 import { MockDB } from "../../../../db/__mocks__/getDB"
 import { getDB } from "../../../../db/getDB"
+import { generateInstallation } from "../../../../testing/installationFactory"
 import { createPerilSandboxAPIJWT } from "../../../../runner/sandbox/jwt"
 
 jest.mock("../../../api", () => ({
@@ -19,7 +20,7 @@ beforeEach(() => mockDB.clear())
 
 describe("handle mutations", () => {
   it("sends a message to all connected clients", async () => {
-    mockDB.getInstallation.mockReturnValueOnce({ iID: 1 })
+    mockDB.getInstallation.mockReturnValueOnce(Promise.resolve(generateInstallation({ iID: 1 })))
     const sandboxJWT = createPerilSandboxAPIJWT(1, ["dangerfileFinished"])
 
     const mutate = gql`

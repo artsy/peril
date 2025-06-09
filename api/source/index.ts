@@ -4,7 +4,7 @@ import * as os from "os"
 import logger from "./logger"
 import { peril } from "./peril"
 
-const WORKERS = process.env.NODE_ENV === "production" ? process.env.WEB_CONCURRENCY || os.cpus().length : 1
+const WORKERS = process.env.NODE_ENV === "production" ? Number(process.env.WEB_CONCURRENCY) || os.cpus().length : 1
 const log = (message: string) => {
   if (WORKERS > 1) {
     logger.info(message)
@@ -12,12 +12,12 @@ const log = (message: string) => {
 }
 
 if (cluster.isMaster) {
-  log(`[CLUSTER] Master cluster setting up ${WORKERS} workers...`)
+  log(`[CLUSTER] Master process setting up ${WORKERS} workers...`)
   for (let i = 0; i < WORKERS; i++) {
     cluster.fork() // create a worker
   }
 
-  cluster.on("online", worker => {
+  cluster.on("online", (worker) => {
     log(`[CLUSTER] Worker ${worker.process.pid} is online`)
   })
 

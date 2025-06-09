@@ -63,7 +63,7 @@ export const setInstallationToRecord = async (installationID: number) => {
 }
 
 /** Removes all recorded webhooks for a specific installation */
-export const wipeAllRecordedWebhooks = async (installationID: number) => RecordedWebhook.remove({ iID: installationID })
+export const wipeAllRecordedWebhooks = async (installationID: number) => RecordedWebhook.deleteMany({ iID: installationID })
 
 /** Brings back a bunch of webhooks, basically everything but the json payload */
 export const getRecordedWebhooksForInstallation = async (installationID: number) =>

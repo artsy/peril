@@ -64,9 +64,9 @@ describe("my installation queries", () => {
 
   it("gets an installation that you have access to in the JWT", async () => {
     // It needs an installation with perilSettingsJSONURL to pass
-    mockDB.getInstallations.mockReturnValueOnce([
+    mockDB.getInstallations.mockReturnValueOnce(Promise.resolve([
       generateInstallation({ iID: 123, login: "Test", perilSettingsJSONURL: "a/b@c.ts" }),
-    ])
+    ]))
 
     const jwt = createPerilUserJWT({ name: "Orta", avatar_url: "hi" }, [123])
     const result = await graphql(schema, queryMyInstallations, null, { jwt })
@@ -78,7 +78,7 @@ describe("my installation queries", () => {
   })
 
   it("doesn't include installations without perilSettingsJSON", async () => {
-    mockDB.getInstallations.mockReturnValueOnce([generateInstallation({ iID: 1231, login: "Test" })])
+    mockDB.getInstallations.mockReturnValueOnce(Promise.resolve([generateInstallation({ iID: 1231, login: "Test" })]))
 
     const jwt = createPerilUserJWT({ name: "Orta", avatar_url: "hi" }, [123])
     const result = await graphql(schema, queryMyInstallations, null, { jwt })
@@ -90,7 +90,7 @@ describe("my installation queries", () => {
   })
 
   it("doesn't include installations without perilSettingsJSON", async () => {
-    mockDB.getInstallations.mockReturnValueOnce([generateInstallation({ iID: 1231, login: "Test" })])
+    mockDB.getInstallations.mockReturnValueOnce(Promise.resolve([generateInstallation({ iID: 1231, login: "Test" })]))
 
     const jwt = createPerilUserJWT({ name: "Orta", avatar_url: "hi" }, [123])
     const result = await graphql(schema, queryMyUnfinishedInstallations, null, { jwt })
@@ -113,9 +113,9 @@ describe("an installation queries", () => {
 
   it("gets an installation that you have access to in the JWT", async () => {
     // It needs an installation with perilSettingsJSONURL to pass
-    mockDB.getInstallations.mockReturnValueOnce([
+    mockDB.getInstallations.mockReturnValueOnce(Promise.resolve([
       generateInstallation({ iID: 123, login: "Test", perilSettingsJSONURL: "a/b@c.ts" }),
-    ])
+    ]))
 
     const jwt = createPerilUserJWT({ name: "Orta", avatar_url: "hi" }, [123])
     const result = await graphql(schema, queryInstallation(123), null, { jwt })
@@ -128,9 +128,9 @@ describe("an installation queries", () => {
 
   it("does not get an installation that you do not have access to in the JWT", async () => {
     // It needs an installation with perilSettingsJSONURL to pass
-    mockDB.getInstallations.mockReturnValueOnce([
+    mockDB.getInstallations.mockReturnValueOnce(Promise.resolve([
       generateInstallation({ iID: 123, login: "Test", perilSettingsJSONURL: "a/b@c.ts" }),
-    ])
+    ]))
 
     const jwt = createPerilUserJWT({ name: "Orta", avatar_url: "hi" }, [123])
     const result = await graphql(schema, queryInstallation(312), null, { jwt })

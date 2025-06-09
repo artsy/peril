@@ -19,7 +19,7 @@ services:
     ports:
       - 5001:3000
   {{ project_name }}-mongodb:
-    image: mongo:4.0
-    command: ["--storageEngine=mmapv1", "--quiet", "--nojournal"]
+    image: mongo:7.0
+    command: ["--storageEngine=mmapv1", "--quiet"]
     volumes:
       - {{ project_name }}-mongodb-data-volume:/data/db

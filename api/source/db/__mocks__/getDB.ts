@@ -16,13 +16,13 @@ type InstallationToVoid = (installationID: number) => Promise<void>
 // Take the DB and rewrite all of its functions to be both the original version and potentially the
 // jest mocked version of it.
 export interface MockDB extends DatabaseAdaptor {
-  setup: NullFunc & jest.Mock<NullFunc>
-  getInstallation: InstallationIDToNullInstallation & jest.Mock<InstallationIDToNullInstallation>
-  getInstallations: InstallationIDsToInstallations & jest.Mock<InstallationIDsToInstallations>
-  updateInstallation: InstallationIDToNullInstallation & jest.Mock<InstallationIDToNullInstallation>
-  saveInstallation: InstallationIDToInstallation & jest.Mock<InstallationIDToNullInstallation>
-  deleteInstallation: InstallationToVoid & jest.Mock<InstallationToVoid>
-  getSchedulableInstallationsWithKey: NoArgsToInstallations & jest.Mock<NoArgsToInstallations>
+  setup: NullFunc & jest.Mock<Promise<void>>
+  getInstallation: InstallationIDToNullInstallation & jest.Mock<Promise<GitHubInstallation | null>>
+  getInstallations: InstallationIDsToInstallations & jest.Mock<Promise<GitHubInstallation[]>>
+  updateInstallation: InstallationIDToNullInstallation & jest.Mock<Promise<GitHubInstallation | null>>
+  saveInstallation: InstallationIDToInstallation & jest.Mock<Promise<GitHubInstallation>>
+  deleteInstallation: InstallationToVoid & jest.Mock<Promise<void>>
+  getSchedulableInstallationsWithKey: NoArgsToInstallations & jest.Mock<Promise<GitHubInstallation[]>>
   clear: () => void
 }
 

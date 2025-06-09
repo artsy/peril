@@ -8,6 +8,6 @@
     "heroku-postbuild": "./scripts/heroku.build"
   },
   "engines": {
-    "node": "14"
+    "node": "16"
   }
 }
