@@ -292,9 +292,9 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ project_name }}
+  name: {{ project_name }}-2025
 spec:
-  ingressClassName: nginx
+  ingressClassName: external-nginx
   rules:
   - host: {{ project_name }}-api-staging.artsy.net
     http:
