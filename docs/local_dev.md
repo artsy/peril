@@ -3,7 +3,7 @@
 ```sh
 git clone https://github.com/danger/peril.git
 cd peril
-yarn install
+yarn install --ignore-scripts
 ```
 
 Peril is a TypeScript project, so I'd recommend using VS Code. The project is pretty well tested now, so it's very
@@ -30,7 +30,8 @@ You should get a reply back from peril [saying](../api/source/github/events/crea
 
 Now, any other GitHub event goes to peril and is handled by the
 [GitHub runner](../api/source/github/events/github_runner.ts). This is powered by JSON and a set of rules called
-[DangerRunRules](../api/source/danger/danger_run.ts) - these bind GitHub event names + actions to actions in danger. E.g.
+[DangerRunRules](../api/source/danger/danger_run.ts) - these bind GitHub event names + actions to actions in danger.
+E.g.
 
 ```json
 "rules": {
@@ -83,7 +84,7 @@ If you want to also make changes to Danger JS, and use the local version to make
 # from Peril
 cd ..
 git clone https://github.com/danger/danger-js.git
-yarn install
+yarn install --ignore-scripts
 yarn link danger
 
 # Then start the file watcher in a new tab

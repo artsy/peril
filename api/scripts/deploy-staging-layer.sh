@@ -8,7 +8,7 @@ yarn ts-node source/scripts/generate-runner-deps.ts
 
 echo "Installing the deps"
 cd ../runner
-yarn install
+yarn install --ignore-scripts
 
 cd ../api
 

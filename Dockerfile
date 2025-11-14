@@ -16,7 +16,7 @@ COPY dashboard/package.json dashboard/yarn.lock ./dashboard/
 
 # Install application dependencies
 RUN yarn global add react-scripts serve && \
-  yarn install --frozen-lockfile && \
+  yarn install --frozen-lockfile --ignore-scripts && \
   yarn cache clean
 
 COPY . ./
@@ -28,7 +28,7 @@ ENV REACT_APP_PUBLIC_WEB_ROOT_URL='https://peril-staging.artsy.net'
 # Build application
 # Update file/directory permissions
 RUN yarn workspace dashboard build && \
-    yarn workspace api build || exit 0 && \
+  yarn workspace api build || exit 0 && \
   chown -R deploy:deploy ./
 
 # Switch to less-privileged user
