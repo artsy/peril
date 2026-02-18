@@ -1,3 +1,6 @@
+### NOTICE OF RETIREMENT
+Artsy's Peril instance has been retired as of February 18th, 2026.
+
 <p align="center">
   <img src="http://danger.systems/images/js/peril-logo-hero-cachable@2x.png" width=250/>
 </p>
@@ -36,7 +39,7 @@ you could write tests which:
 
 ---
 
-### Peril vs GitHub Actions. 
+### Peril vs GitHub Actions.
 
 80% of Peril is available today in GitHub Actions. Key things which are not:
 
@@ -45,7 +48,7 @@ you could write tests which:
 - Triggering delayed jobs from webhooks (e.g. do this thing in 5m)
 
 Is this enough to warrant self-hosting? Maybe, but it's pushing it a bit if you aren't comfortable hosting a JS project.
-Danger got extended with a [lot of Peril's features](https://github.com/danger/danger-js/blob/master/CHANGELOG.md#500) in order to better support GitHub Actions during the alpha. 
+Danger got extended with a [lot of Peril's features](https://github.com/danger/danger-js/blob/master/CHANGELOG.md#500) in order to better support GitHub Actions during the alpha.
 
 Given that I, Orta, can't install Peril on the Microsoft GitHub org, and GitHub Actions has most of Peril's features - it's unlikely that I'll be building much more into the core. I'll keep it ticking though, it's not much work.
 
